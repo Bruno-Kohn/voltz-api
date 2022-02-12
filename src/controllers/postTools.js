@@ -28,12 +28,30 @@ async function postTools(req, res) {
         [title, link, description]
       );
 
-      console.log(tags);
+      await tags.forEach((i) =>
+        connection.query('INSERT INTO tags (name) VALUES ($1)', [i])
+      );
+
+      //console.log(tags);
 
       const result = await connection.query(
         'SELECT * FROM tools where title = $1',
         [title]
       );
+
+      tags.forEach(async (i) => {
+        const resultTags = await connection.query(
+          'SELECT * FROM tags where name = $1',
+          [i]
+        );
+        //console.log(resultTags.rows[0], 'aquiiiiiiiiiiiiiiiiiiiiii');
+        //console.log(result.rows[0], 'depoisssssssssssssss');
+
+        await connection.query(
+          'INSERT INTO tools_tags (tags_id, tools_id) VALUES ($1, $2)',
+          [resultTags.rows[0].id, result.rows[0].id]
+        );
+      });
 
       return res
         .status(201)
