@@ -10,6 +10,6 @@ app.use(express.json());
 
 app.get('/tools', getTools);
 app.post('/tools', postTools);
-app.delete('/tools:id', deleteTools);
+app.delete('/tools/:id', deleteTools);
 
 export default app;
