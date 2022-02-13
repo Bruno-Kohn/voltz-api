@@ -1,0 +1,109 @@
+{
+    "openapi": "3.0.0",
+    "info" : {
+        "title": "Tool management API",
+        "description": "Repository to manage tools with their respective names, links, descriptions and tags",
+        "contact": {
+            "email": "brunokohn1993@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "Beta API"
+        }
+    ],
+    "paths": {
+        "/tools": {
+            "post":{
+                "summary": "Tool registration",
+                "description": "This route adds a tool in the database",
+                "tags": ["Tools"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "link": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "tags": {
+                                        "type": "array"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "tool": {
+                                    "value": {
+                                        "title": "hotel",
+                                        "link": "https://github.com/typicode/hotel",
+                                        "description": "Local app manager. Start apps within your browser, developer tool with local .localhost domain and https out of the box",
+                                        "tags":["node", "organizing", "webapps", "domain", "developer", "https", "proxy"]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": " Internal Server Error"
+                    }
+                }
+            },
+            "get": {
+                "description": "List all registered tools",
+                "summary": "List all registered tools",
+                "tags": ["Tools"],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/tools/{id}":{
+             "delete": {
+                "description": "Delete a tool from registered list",
+                "summary": "Delete a tool from registered list",
+                "tags": ["Tools"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Tool id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        }
+    }
+}
+
