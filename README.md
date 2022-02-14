@@ -32,3 +32,13 @@ npm i
 npx nodemon ./src/server.js
 ```
 4. Finally access http://localhost:3000 on your favorite browser
+5. Create your database following the next steps
+```bash
+INSERT INTO tools (title, link, description) VALUES ('Notion','https://notion.so', 'All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized.'), ('json-server','https://github.com/typicode/json-server', 'Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs'), ('fastify','https://www.fastify.io/', 'Extremely fast and simple, low-overhead web framework for NodeJS. Supports HTTP2.');
+```
+```bash
+INSERT INTO tags (name) VALUES ('organization'), ('planning'), ('collaboration'), ('writing'), ('calendar'), ('api'), ('json'), ('schema'), ('node'), ('github'), ('rest'), ('web'), ('framework'), ('http2'), ('https'), ('localhost');
+```
+```bash
+INSERT INTO tools_tags (tags_id, tools_id) VALUES (1,1), (2,1), (3,1), (4,1), (5,1), (6,2), (7,2), (8,2), (9,2), (10,2), (11,2), (12,3), (13,3), (14,3), (15,3), (16,3), (9,3); 
+```
